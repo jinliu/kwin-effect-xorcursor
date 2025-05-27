@@ -1,0 +1,9 @@
+{
+    "KPlugin": {
+        "Category": "Appearance",
+        "Description": "XOR Cursor",
+        "EnabledByDefault": false,
+        "License": "GPL",
+        "Name": "XorCursor"
+    }
+}
