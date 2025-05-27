@@ -83,7 +83,7 @@ void XorCursorEffect::paintScreen(const RenderTarget &renderTarget, const Render
     if (!cursorTexture) {
         return;
     }
-    
+
     const auto cursor = effects->cursorImage();
     QSizeF cursorSize = QSizeF(cursor.image().size()) / cursor.image().devicePixelRatio();
     const QPointF p = effects->cursorPos() - cursor.hotSpot();
@@ -91,8 +91,8 @@ void XorCursorEffect::paintScreen(const RenderTarget &renderTarget, const Render
 
     QRegion cursorRegion = QRegion(QRectF(p, cursorSize).toAlignedRect());
     effects->paintScreen(renderTarget, viewport, mask, cursorRegion, screen);
-	glEnable(GL_COLOR_LOGIC_OP);		
-    glLogicOp(GL_XOR);    
+	glEnable(GL_COLOR_LOGIC_OP);
+    glLogicOp(GL_XOR);
     auto s = ShaderManager::instance()->pushShader(ShaderTrait::MapTexture | ShaderTrait::TransformColorspace);
     s->setColorspaceUniforms(ColorDescription::sRGB, renderTarget.colorDescription(), RenderingIntent::Perceptual);
     QMatrix4x4 mvp = viewport.projectionMatrix();
@@ -100,7 +100,7 @@ void XorCursorEffect::paintScreen(const RenderTarget &renderTarget, const Render
     s->setUniform(GLShader::Mat4Uniform::ModelViewProjectionMatrix, mvp);
     cursorTexture->render(cursorSize * scale);
     ShaderManager::instance()->popShader();
-	glDisable(GL_COLOR_LOGIC_OP);		
+	glDisable(GL_COLOR_LOGIC_OP);
 }
 
 bool XorCursorEffect::isActive() const
